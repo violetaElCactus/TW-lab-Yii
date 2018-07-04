@@ -1,0 +1,107 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 04-07-2018 a las 02:14:27
+-- Versión del servidor: 10.1.33-MariaDB
+-- Versión de PHP: 7.2.6
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `artista`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cancion`
+--
+
+CREATE TABLE `cancion` (
+  `nombre` varchar(50) NOT NULL,
+  `genero` varchar(50) NOT NULL,
+  `duracion` int(50) NOT NULL,
+  `anio` date NOT NULL,
+  `compositor` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `cancion`
+--
+
+INSERT INTO `cancion` (`nombre`, `genero`, `duracion`, `anio`, `compositor`) VALUES
+('All shapes are cuadrilateros', 'Hip hop', 357, '2009-12-12', 'Scuers'),
+('Car the mile', 'Folk', 240, '1980-04-04', 'Cardo'),
+('Cardeando con el karma', 'indie rock', 330, '2015-01-06', 'Cardo'),
+('Its me cardeMario', 'Post funk metal', 730, '2002-10-10', 'Cardo'),
+('Marcha de los cardioides', 'Cumbia progresiva', 520, '1992-02-04', 'Cardo'),
+('No', 'k-pop', 310, '0000-00-00', 'Kevinacho'),
+('Squares and circles', 'post rock', 240, '2005-07-07', 'Scuers'),
+('나는 춤을 추고 싶다.', 'k-pop', 320, '2016-03-03', 'Kevinacho');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `compositor`
+--
+
+CREATE TABLE `compositor` (
+  `pseudonimo` varchar(50) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `apellido` varchar(50) NOT NULL,
+  `nacionalidad` varchar(50) NOT NULL,
+  `nacimiento` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `compositor`
+--
+
+INSERT INTO `compositor` (`pseudonimo`, `nombre`, `apellido`, `nacionalidad`, `nacimiento`) VALUES
+('Cardo', 'Iván', 'Cardemoils', 'México', '1947-12-12'),
+('Kevinacho', 'Kevin', 'Mark', 'Korea', '1990-05-07'),
+('Scuers', 'Bastian', 'Squers', 'EUA', '1980-03-03');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `cancion`
+--
+ALTER TABLE `cancion`
+  ADD PRIMARY KEY (`nombre`),
+  ADD KEY `compositor` (`compositor`);
+
+--
+-- Indices de la tabla `compositor`
+--
+ALTER TABLE `compositor`
+  ADD PRIMARY KEY (`pseudonimo`),
+  ADD KEY `nombre` (`nombre`);
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `cancion`
+--
+ALTER TABLE `cancion`
+  ADD CONSTRAINT `cancion_ibfk_1` FOREIGN KEY (`compositor`) REFERENCES `compositor` (`pseudonimo`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
